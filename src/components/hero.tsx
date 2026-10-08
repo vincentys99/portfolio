@@ -2,7 +2,7 @@ import { site } from "@/data/site";
 
 const steps = ["Select the skills you need", "Add them to your cart", "Check out to get in touch"];
 
-// TODO(step 12): the live A/B test swaps this headline between two variants.
+// TODO(step 13): the live A/B test swaps this headline between two variants.
 export function Hero() {
   return (
     <section className="mx-auto max-w-6xl px-4 pb-8 pt-10 sm:pb-12 sm:pt-16">
@@ -10,10 +10,7 @@ export function Hero() {
       <h1 className="mt-2 max-w-2xl text-3xl font-semibold tracking-tight sm:text-5xl">
         {site.role}.
       </h1>
-      <p className="mt-4 max-w-xl text-muted sm:text-lg">
-        Browse my skills like a store. A/B testing comes first, backed by the
-        engineering to build it.
-      </p>
+      <p className="mt-4 max-w-xl text-muted sm:text-lg">{site.intro}</p>
 
       <ol className="mt-6 flex flex-col gap-2 text-sm sm:flex-row sm:gap-6">
         {steps.map((step, i) => (

@@ -9,6 +9,9 @@ export const site = {
   name: "Vincent",
   role: "Web developer who builds and ships A/B tests",
   location: "Selangor, Malaysia · open to remote",
+  // TODO(content): placeholder intro; replace with my own 2–3 sentence bio.
+  intro:
+    "Hi, I'm Vincent. I build A/B tests from first line of code to launch, set up the tracking that measures them, and back it all with front-end and full-stack engineering.",
   contactHref: "/checkout",
   cv: {
     href: "/cv.pdf",

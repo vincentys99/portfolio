@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site, socialLinks } from "@/data/site";
 
 export function SiteFooter() {
@@ -8,6 +9,12 @@ export function SiteFooter() {
           <p className="font-semibold">{site.name}</p>
           <p className="text-sm text-muted">{site.role}</p>
           <p className="text-sm text-muted">{site.location}</p>
+          <Link
+            href="/shop"
+            className="-mx-2 flex h-11 w-fit items-center px-2 text-sm font-medium underline-offset-4 hover:underline"
+          >
+            Shop all skills
+          </Link>
         </div>
 
         <ul className="-mx-2 flex flex-wrap gap-x-2 gap-y-1">

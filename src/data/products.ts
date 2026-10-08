@@ -429,6 +429,17 @@ export const products: Product[] = (Object.keys(catalogue) as ProductId[]).map(
   (id) => ({ id, ...catalogue[id] }),
 );
 
+// Shown on the homepage, in this order. An even number fills the two-column phone grid.
+export const featuredProductIds: ProductId[] = [
+  "ab-test-development",
+  "experiment-setup-qa",
+  "conversion-rate-optimisation",
+  "analytics-tracking",
+  "shopify-app",
+  "javascript",
+];
+
+// "Shop by role" on the homepage: one tap adds every skill in the bundle to the cart.
 // TODO(content): check these match the roles I'm applying for.
 export const bundles: Bundle[] = [
   {
