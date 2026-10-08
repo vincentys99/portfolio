@@ -4,7 +4,7 @@ Oct 1, 2026 · @Vincent
 
 ## Overview & goal
 
-A store-themed portfolio where recruiters "shop" my skills by selecting them on one collection page, add them to a cart, and check out by contacting me. Success means a recruiter or hiring manager understands within 30 seconds that I'm a web developer who builds and ships A/B tests, and then reaches out.
+A store-themed portfolio where recruiters "shop" my skills by selecting them on a collection page, add them to a cart, and check out by contacting me. Success means a recruiter or hiring manager understands within 30 seconds that I'm a web developer who builds and ships A/B tests, and then reaches out.
 
 - Built with Next.js, hosted on Vercel (Hobby plan) at a free vercel.app address; a custom domain comes after the MVP works well.
 - The old vincentys99.github.io repo becomes a redirect to the new site.
@@ -34,7 +34,8 @@ Every store element maps to one portfolio element, so the metaphor stays consist
 
 | Store element | Portfolio meaning |
 | --- | --- |
-| Storefront (home) | Hero, one-line pitch, and the collection page with every product |
+| Storefront (home) | Who I am and what I do, featured products, "Shop by role" bundles, and a link to the full collection |
+| Collection page (/shop) | Every product as a selectable card, grouped by category |
 | Product | A single skill |
 | Category | Specialty, Technical, Tools & platforms, or How I work |
 | "Featured" / "Bestseller" badge | My strongest skills (A/B testing first) |
@@ -42,9 +43,9 @@ Every store element maps to one portfolio element, so the metaphor stays consist
 | Flagship product page | A full page for my strongest work (A/B testing, the Shopify app) |
 | Product reviews | Quotes from colleagues or managers |
 | "Frequently bought together" | Related skills (e.g. JavaScript with A/B test development) |
-| Bundle deal | One tap selects a role's skill set (CRO Specialist, Software Engineer) |
+| Bundle deal | One tap selects a role's skill set (CRO Specialist, Software Engineer), shown on the homepage |
 | Out of stock | A playful note on skills I'm still learning |
-| Cart | The recruiter's shortlist, built by selecting cards and adding them all at once |
+| Cart | The recruiter's shortlist, built by selecting cards and adding them all at once, then reviewed on a full cart page |
 | Checkout | Contact form, pre-filled with the cart |
 | Order confirmation | Thank-you page with expected reply time and next steps |
 | "Did you know..." widgets | A/B testing facts, placed like upsell widgets |
@@ -76,19 +77,20 @@ Every product uses the same fields, stored as data. The card shows the name, tag
 
 ## Sitemap & pages
 
-Version 1 is built around one collection page, arranged as a store's purchase journey, plus a sticky header that lets a recruiter jump straight to contact or the CV from anywhere.
+Version 1 follows a real store's journey (homepage, collection, cart, checkout), plus a sticky header that lets a recruiter jump straight to contact or the CV from anywhere.
 
-&#91;embedded content: sitemap and visitor journey · 5 routes, 1 shortcut\]
+&#91;embedded content: sitemap and visitor journey · 7 routes, 1 shortcut\]
 
 Categories are sections on the collection page, with filter chips to jump between them, rather than separate pages, which keeps the site small and quick to browse on a phone.
 
 ## Key features
 
-Six features carry the concept; the fast path matters most, because the store must never slow down a recruiter who just wants the basics.
+Seven features carry the concept; the fast path matters most, because the store must never slow down a recruiter who just wants the basics.
 
 - **Fast path**: a sticky header with Download CV and Contact on every page, so a recruiter can skip the store entirely.
-- **Collection page**: every product as a selectable card, grouped by category, with a quick view (bottom sheet on mobile, side panel on desktop) for the proof. Role bundles can select a whole skill set in one tap.
-- **Cart**: filled from the collection page in one tap, then shown in a slide-in drawer (full-screen on mobile) with a count badge in the header. The cart is saved in the browser so it survives a refresh.
+- **Homepage**: a short intro (who I am, what I do), featured products with add-to-cart, "Shop by role" bundles, and a "Browse all skills" link. The key skills must be visible here, because every visitor who doesn't click through to the collection is lost.
+- **Collection page**: every product as a selectable card, grouped by category, with a quick view (bottom sheet on mobile, side panel on desktop) for the proof. It lives at /shop.
+- **Cart**: filled from the homepage or the collection page, confirmed with a small "Added to cart" message, and reviewed on a full cart page at /cart. A count badge sits in the header. The cart is saved in the browser so it survives a refresh.
 - **Checkout**: a short form (name, company, role hiring for, email, message) with the cart items attached. It works with an empty cart too ("just say hi"). It is sent by email through a Next.js API route and Resend, with spam protection.
 - **Did you know...**: short, sourced A/B testing facts shown in quick views and in the cart, stored in one data file so they are easy to add to.
 - **Live A/B test**: the site runs a real test on itself, such as two hero headlines split 50/50. A small panel tells visitors which variant they're in and how the test works, which demonstrates the skill instead of describing it.
@@ -112,7 +114,7 @@ Content, not code, is the real bottleneck: gather this before the build starts, 
 
 The look should read as a clean, modern online store first and a playful portfolio second, so it feels professional to a recruiter at a glance. Palette and fonts are still open and get settled from the reference sites before building.
 
-- Mobile patterns borrowed from real stores: collection grid with category filter chips, selectable cards, a sticky "Add selected to cart" bar, quick view as a bottom sheet, full-screen cart drawer.
+- Mobile patterns borrowed from real stores: collection grid with category filter chips, selectable cards, a sticky "Add selected to cart" bar, quick view as a bottom sheet, "Added to cart" confirmation, full cart page.
 - Large tap targets within thumb reach; nothing important hidden behind hover.
 - One accent colour for calls to action (Add selected to cart, Checkout, Download CV), used nowhere else.
 - Fast loading: optimised images, minimal animation, aiming for a strong mobile Lighthouse score.
@@ -139,9 +141,9 @@ Version 1 is the smallest site a recruiter can use end to end: browse, add to ca
 
 | Version 1 (launch) | Later |
 | --- | --- |
-| Collection page with selectable cards and category filter | Role bundles (CRO Specialist, Software Engineer) |
+| Collection page with selectable cards and category filter | More role bundles beyond the first two |
 | Quick views for every product; full pages for 2–3 flagship items | Live A/B test on the hero, with its results published |
-| Cart drawer and checkout with email | Reviews and quotes from colleagues |
+| Homepage with featured products and two role bundles; cart page and checkout with email | Reviews and quotes from colleagues |
 | Thank-you page | "Out of stock" skills |
 | Sticky header with CV and Contact | Dark mode |
 | "Did you know" with 5 facts | More facts and an A/B testing explainer page |
@@ -155,14 +157,15 @@ Deploy an empty site on day one, then build one working piece per session, so th
 2. Export this doc to Markdown and add it to the repo as `CLAUDE.md`, so Claude Code reads it every session.
 3. Define the data model: `products.ts` (categories, card fields, flagship flag, bundles) and `facts.ts`.
 4. Build the layout: sticky header with cart icon, CV and Contact; footer.
-5. Build the collection page: hero, selectable product cards grouped by category, filter chips, sticky "Add selected to cart" bar.
-6. Build the quick view (bottom sheet on mobile, side panel on desktop), then the flagship product page template.
-7. Add the cart: selection state, context, localStorage, drawer.
-8. Add checkout: form, API route, email, thank-you page.
-9. Add GA4 through GTM, with events for all conversion levels.
-10. Add "Did you know" cards.
-11. Test on real phones, run Lighthouse, fix issues; launch, redirect vincentys99.github.io, then buy the custom domain.
-12. After launch: the live A/B test via middleware, then the items under Later.
+5. Build the collection page at /shop: selectable product cards grouped by category, filter chips, sticky "Add selected to cart" bar.
+6. Build the homepage at /: intro hero, featured products, "Shop by role" bundles, "Browse all skills" link to /shop.
+7. Build the quick view (bottom sheet on mobile, side panel on desktop), then the flagship product page template.
+8. Add the cart: selection state, context, localStorage, "Added to cart" confirmation, cart page at /cart.
+9. Add checkout: form, API route, email, thank-you page.
+10. Add GA4 through GTM, with events for all conversion levels.
+11. Add "Did you know" cards.
+12. Test on real phones, run Lighthouse, fix issues; launch, redirect vincentys99.github.io, then buy the custom domain.
+13. After launch: the live A/B test via middleware, then the items under Later.
 
 ## Open questions
 
