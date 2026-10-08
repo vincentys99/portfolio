@@ -21,6 +21,13 @@
   --font-sans: var(--font-geist-sans);
 }
 
+/* Smooth jumps to category sections; layout.tsx keeps page navigation instant. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 body {
   background: var(--color-surface);
   color: var(--color-ink);

@@ -21,6 +21,23 @@ export function CartIcon({ className }: IconProps) {
   );
 }
 
+export function CheckIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={3}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m5 12.5 4.5 4.5L19 7.5" />
+    </svg>
+  );
+}
+
 export function DownloadIcon({ className }: IconProps) {
   return (
     <svg

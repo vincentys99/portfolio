@@ -1,13 +1,17 @@
-import { site } from "@/data/site";
+import { Collection, type CollectionSection } from "@/components/collection";
+import { Hero } from "@/components/hero";
+import { categories, getProductsByCategory } from "@/data/products";
 
-// TODO(step 5): replace with the hero and collection page.
+const sections: CollectionSection[] = categories.map((category) => ({
+  category,
+  products: getProductsByCategory(category.id),
+}));
+
 export default function Home() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16">
-      <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-        {site.role}.
-      </h1>
-      <p className="mt-3 text-muted">The store is opening soon.</p>
-    </section>
+    <>
+      <Hero />
+      <Collection sections={sections} />
+    </>
   );
 }

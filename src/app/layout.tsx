@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -18,9 +18,18 @@ export const metadata: Metadata = {
   description: `${site.role}. Browse my skills like a store, add the ones you need to your cart, and check out to get in touch.`,
 };
 
+// "cover" lets the sticky bottom bar pad itself clear of the phone's home indicator.
+export const viewport: Viewport = {
+  viewportFit: "cover",
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${geistSans.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col font-sans">
         <a
           href="#main"
