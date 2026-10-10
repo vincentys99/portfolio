@@ -54,6 +54,11 @@ export type Workplace = "PRISM+" | "Convx Asia" | "Earlier roles";
 
 export type Badge = "bestseller" | "featured";
 
+export const badgeLabels: Record<Badge, string> = {
+  bestseller: "Bestseller",
+  featured: "Featured",
+};
+
 export type Specs = {
   /** Year I started using it; years of use are worked out from this. */
   since?: number;

@@ -28,6 +28,11 @@
   }
 }
 
+/* Stop the page scrolling behind an open quick view. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 body {
   background: var(--color-surface);
   color: var(--color-ink);
